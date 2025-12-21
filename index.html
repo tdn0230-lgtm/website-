@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GREENLOOP | Sustainable Secondhand Clothing</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="header-container">
+          <a href="#" class="logo">
+            <i class="fas fa-recycle"></i>
+            GREENLOOP
+          </a>
+
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <nav class="nav-menu">
+            <ul class="nav-links">
+              <li><a href="#" class="active">Home</a></li>
+              <li><a href="#shop">Shop</a></li>
+              <li><a href="#categories">Categories</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#sell">Sell With Us</a></li>
+            </ul>
+          </nav>
+
+          <div class="header-icons">
+            <div class="cart-icon" id="cartIcon">
+              <i class="fas fa-shopping-bag"></i>
+              <span class="cart-count">3</span>
+            </div>
+            <div class="user-icon">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#sell">Sell With Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Style with a Conscience</h1>
+          <p>
+            Discover gently-loved fashion at up to 70% off retail prices.
+            Sustainable, affordable, and uniquely stylish.
+          </p>
+          <a href="#shop" class="btn">Shop Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section" id="categories">
+      <div class="container">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="categories">
+          <div class="category-card">
+            <div
+              class="category-img"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+              "
+            ></div>
+            <div class="category-info">
+              <h3>Women's Clothing</h3>
+              <p>Dresses, tops, jackets & more</p>
+              <a href="women.html" class="btn btn-primary">Browse</a>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div
+              class="category-img"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1520975916090-3105956dac38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+              "
+            ></div>
+            <div class="category-info">
+              <h3>Men's Clothing</h3>
+              <p>Shirts, pants, outerwear & more</p>
+              <a href="men.html" class="btn btn-primary">Browse</a>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div
+              class="category-img"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+              "
+            ></div>
+            <div class="category-info">
+              <h3>Kids & Babies</h3>
+              <p>Gently used children's clothing</p>
+              <a href="kid.html" class="btn btn-primary">Browse</a>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div
+              class="category-img"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+              "
+            ></div>
+            <div class="category-info">
+              <h3>Accessories</h3>
+              <p>Bags, shoes, jewelry & more</p>
+              <a href="accessories.html" class="btn btn-primary">Browse</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="shop">
+      <div class="container">
+        <h2 class="section-title">Featured Items</h2>
+        <div class="products">
+          <!-- Product cards will be generated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>Our Sustainable Mission</h2>
+            <p>
+              At GREENLOOP, we believe fashion should be both stylish and
+              sustainable. By giving pre-loved clothing a second life, we're
+              reducing textile waste and making fashion more accessible.
+            </p>
+            <p>
+              Every purchase you make helps keep clothing out of landfills and
+              supports a circular economy. Join our community of conscious
+              shoppers today!
+            </p>
+            <a href="#sell" class="btn">Sell Your Items</a>
+          </div>
+
+          <div class="about-stats">
+            <div class="stat-item">
+              <div class="stat-number">10,000+</div>
+              <div class="stat-text">Items Rescued</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">8,500+</div>
+              <div class="stat-text">Happy Customers</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">75%</div>
+              <div class="stat-text">Average Savings</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">3.5 Tons</div>
+              <div class="stat-text">Waste Reduced</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sell With Us Section -->
+    <section class="sell-section" id="sell">
+      <div class="container">
+        <div class="sell-content">
+          <div class="sell-text">
+            <h2>Sell With Us</h2>
+            <p>
+              Have gently used clothing in good condition? Turn your closet
+              clean-out into cash! We make selling simple with free shipping and
+              fast payouts.
+            </p>
+            <ul class="sell-benefits">
+              <li><i class="fas fa-check-circle"></i> Free shipping kits</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Up to 70% of sale price
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Payout within 48 hours
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Quality standards guide
+              </li>
+            </ul>
+            <button class="btn" id="startSellingBtn">Start Selling Now</button>
+          </div>
+          <div class="sell-image">
+            <img
+              src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              alt="Person selling clothes"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+      <div class="cart-modal-content">
+        <div class="cart-header">
+          <h3>Your Shopping Bag</h3>
+          <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items">
+          <!-- Cart items will be added by JavaScript -->
+        </div>
+        <div class="cart-summary">
+          <div class="cart-total">
+            <span>Total:</span>
+            <span class="total-price">$0.00</span>
+          </div>
+          <button class="btn btn-primary checkout-btn">
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>GREENLOOP</h3>
+            <p>
+              Sustainable secondhand fashion for everyone. Join the movement to
+              reduce textile waste.
+            </p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#shop">Shop</a></li>
+              <li><a href="#categories">Categories</a></li>
+              <li><a href="#about">About Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Customer Service</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Shipping Policy</a></li>
+              <li><a href="#">Returns & Exchanges</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Newsletter</h4>
+            <p>Subscribe for updates on new arrivals and exclusive deals.</p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit" class="btn">Subscribe</button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 GREENLOOP. All rights reserved. |
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js.js"></script>
+  </body>
+</html>

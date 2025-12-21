@@ -1,11 +1,11 @@
-// Product Data
+// Product Data with VND prices
 const products = [
   {
     id: 1,
     name: "Denim Jacket",
     category: "Women's Clothing",
-    price: 24.99,
-    originalPrice: 59.99,
+    price: 649740,
+    originalPrice: 1559740,
     image:
       "https://images.unsplash.com/photo-1537465978529-d23b17165b3b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     rating: 4.5,
@@ -16,8 +16,8 @@ const products = [
     id: 2,
     name: "Floral Summer Dress",
     category: "Women's Clothing",
-    price: 19.99,
-    originalPrice: 45.0,
+    price: 519740,
+    originalPrice: 1170000,
     image:
       "https://plus.unsplash.com/premium_photo-1723914108893-ac3047a4f1df?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     rating: 4.8,
@@ -28,8 +28,8 @@ const products = [
     id: 3,
     name: "Men's Casual Blazer",
     category: "Men's Clothing",
-    price: 34.99,
-    originalPrice: 89.99,
+    price: 909740,
+    originalPrice: 2339740,
     image:
       "https://images.unsplash.com/photo-1740710748146-a15d840d6f40?q=80&w=798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     rating: 4.3,
@@ -40,10 +40,10 @@ const products = [
     id: 4,
     name: "Leather Ankle Boots",
     category: "Accessories",
-    price: 42.5,
-    originalPrice: 120.0,
+    price: 1105000,
+    originalPrice: 3120000,
     image:
-      "https://plus.unsplash.com/premium_photo-1673367751742-c8bb4902be75?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://images.unsplash.com/photo-1761052720710-32349209f6b4?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://plus.unsplash.com/premium_photo-1673367751742-c8bb4902be75?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     rating: 4.7,
     tag: "Limited",
     condition: "Excellent",
@@ -52,8 +52,8 @@ const products = [
     id: 5,
     name: "Kids' Dinosaur Hoodie",
     category: "Kids & Babies",
-    price: 14.99,
-    originalPrice: 32.99,
+    price: 389740,
+    originalPrice: 857740,
     image:
       "https://plus.unsplash.com/premium_photo-1726804936616-9fea71911942?q=80&w=1166&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     rating: 4.9,
@@ -64,8 +64,8 @@ const products = [
     id: 6,
     name: "Vintage Graphic Tee",
     category: "Men's Clothing",
-    price: 12.99,
-    originalPrice: 25.99,
+    price: 337740,
+    originalPrice: 675740,
     image:
       "https://images.unsplash.com/photo-1759941279446-dea2722bca33?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dmludGFnZSUyMGdyYXBoaWMlMjB0ZWV8ZW58MHx8MHx8fDA%3D",
     rating: 4.2,
@@ -76,8 +76,8 @@ const products = [
     id: 7,
     name: "Knit Cardigan Sweater",
     category: "Women's Clothing",
-    price: 22.99,
-    originalPrice: 55.0,
+    price: 597740,
+    originalPrice: 1430000,
     image:
       "https://media.cnn.com/api/v1/images/stellar/prod/lead-michelle-freepeoplesweater-cnnu-4.jpg?c=16x9&q=h_833,w_1480,c_fill",
     rating: 4.6,
@@ -88,8 +88,8 @@ const products = [
     id: 8,
     name: "Designer Handbag",
     category: "Accessories",
-    price: 59.99,
-    originalPrice: 199.99,
+    price: 1559740,
+    originalPrice: 5199740,
     image:
       "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     rating: 4.8,
@@ -98,12 +98,12 @@ const products = [
   },
 ];
 
-// Cart Data
+// Cart Data with VND prices
 let cart = [
   {
     id: 2,
     name: "Floral Summer Dress",
-    price: 19.99,
+    price: 519740,
     image:
       "https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     quantity: 1,
@@ -111,7 +111,7 @@ let cart = [
   {
     id: 6,
     name: "Vintage Graphic Tee",
-    price: 12.99,
+    price: 337740,
     image:
       "https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     quantity: 2,
@@ -166,6 +166,11 @@ function displayProducts() {
       ratingStars += '<i class="far fa-star"></i>';
     }
 
+    // Format price for VND
+    const formatPrice = (price) => {
+      return price.toLocaleString("vi-VN") + "₫";
+    };
+
     productCard.innerHTML = `
             <div class="product-img" style="background-image: url('${
               product.image
@@ -178,10 +183,10 @@ function displayProducts() {
                     ${ratingStars} <span>(${product.rating})</span>
                 </div>
                 <div class="product-price">
-                    <span class="original-price">$${product.originalPrice.toFixed(
-                      2
+                    <span class="original-price">${formatPrice(
+                      product.originalPrice
                     )}</span>
-                    $${product.price.toFixed(2)}
+                    ${formatPrice(product.price)}
                     <span class="savings">Save ${savings}%</span>
                 </div>
                 <p><strong>Condition:</strong> ${product.condition}</p>
@@ -275,6 +280,11 @@ function updateCart() {
 
   let totalPrice = 0;
 
+  // Format price for VND
+  const formatPrice = (price) => {
+    return price.toLocaleString("vi-VN") + "₫";
+  };
+
   cart.forEach((item) => {
     const itemTotal = item.price * item.quantity;
     totalPrice += itemTotal;
@@ -287,7 +297,7 @@ function updateCart() {
             }')"></div>
             <div class="cart-item-info">
                 <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-price">$${item.price.toFixed(2)} × ${
+                <div class="cart-item-price">${formatPrice(item.price)} × ${
       item.quantity
     }</div>
             </div>
@@ -308,7 +318,7 @@ function updateCart() {
   });
 
   // Update total price
-  totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+  totalPriceElement.textContent = formatPrice(totalPrice);
 
   // If cart is empty, show message
   if (cart.length === 0) {
@@ -529,8 +539,6 @@ startSellingBtn.addEventListener("click", function () {
     const sellerName = document.getElementById("sellerName").value;
     const sellerEmail = document.getElementById("sellerEmail").value;
 
-    // In a real app, you would send this data to a server
-    // For demo purposes, just show a success message
     showNotification(
       `Thanks ${sellerName}! We'll email your shipping kit to ${sellerEmail} within 24 hours.`
     );
