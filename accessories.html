@@ -1,265 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accessories | GREENLOOP</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css.css" />
+  </head>
+  <body>
     <!-- Header -->
     <header>
-        <div class="container">
-            <div class="header-container">
-                <a href="index.html" class="logo">
-                    <i class="fas fa-recycle"></i>
-                    GREENLOOP
-                </a>
+      <div class="container">
+        <div class="header-container">
+          <a href="index.html" class="logo">
+            <i class="fas fa-recycle"></i>
+            GREENLOOP
+          </a>
 
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
 
-                <nav class="nav-menu">
-                    <ul class="nav-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#shop">Shop</a></li>
-                        <li><a href="index.html#categories">Categories</a></li>
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="index.html#sell">Sell With Us</a></li>
-                    </ul>
-                </nav>
+          <nav class="nav-menu">
+            <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="index.html#shop">Shop</a></li>
+              <li><a href="index.html#categories">Categories</a></li>
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="index.html#sell">Sell With Us</a></li>
+              <li><a href="login.html">Đăng Nhập</a></li>
+              <li><a href="register.html">Đăng Ký</a></li>
+            </ul>
+          </nav>
 
-                <div class="header-icons">
-                    <div class="cart-icon" id="cartIcon">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-count">3</span>
-                    </div>
-                    <div class="user-icon">
-                        <i class="fas fa-user"></i>
-                    </div>
-                </div>
+          <div class="header-icons">
+            <div class="cart-icon" id="cartIcon">
+              <i class="fas fa-shopping-bag"></i>
+              <span class="cart-count">3</span>
             </div>
+            <div class="user-icon">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
         </div>
+      </div>
     </header>
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#shop">Shop</a></li>
-            <li><a href="index.html#categories">Categories</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#sell">Sell With Us</a></li>
-        </ul>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#shop">Shop</a></li>
+        <li><a href="index.html#categories">Categories</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#sell">Sell With Us</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Sign up</a></li>
+      </ul>
     </div>
 
     <!-- Category Header -->
     <section class="category-page">
-        <div class="container">
-            <div class="category-header">
-                <h1>Accessories</h1>
-                <p>Complete your look with our collection of pre-loved accessories. From bags to jewelry, find the perfect finishing touches for any outfit.</p>
-            </div>
-
-            <div class="category-description">
-                <p>Our accessories collection features gently used items in excellent condition. Each piece adds personality to your style while supporting sustainable fashion practices.</p>
-            </div>
-
-            <div class="category-container">
-                <!-- Filter Sidebar -->
-                <aside class="filter-sidebar">
-                    <div class="filter-card">
-                        <h3>Categories</h3>
-                        <ul class="filter-options">
-                            <li>
-                                <input type="checkbox" id="bags" checked>
-                                <label for="bags">Bags & Purses <span class="count">(36)</span></label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="shoes">
-                                <label for="shoes">Shoes <span class="count">(42)</span></label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="jewelry">
-                                <label for="jewelry">Jewelry <span class="count">(58)</span></label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="scarves">
-                                <label for="scarves">Scarves & Hats <span class="count">(27)</span></label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="belts">
-                                <label for="belts">Belts <span class="count">(19)</span></label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="sunglasses">
-                                <label for="sunglasses">Sunglasses <span class="count">(14)</span></label>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="filter-card">
-                        <h3>Material</h3>
-                        <ul class="filter-options">
-                            <li>
-                                <input type="checkbox" id="leather" checked>
-                                <label for="leather">Leather</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="fabric">
-                                <label for="fabric">Fabric</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="metal">
-                                <label for="metal">Metal</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="suede">
-                                <label for="suede">Suede</label>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="filter-card">
-                        <h3>Price Range</h3>
-                        <input type="range" min="5" max="150" value="75" class="price-slider">
-                        <div class="price-values">
-                            <span>$5</span>
-                            <span>$150+</span>
-                        </div>
-                    </div>
-
-                    <div class="filter-card">
-                        <h3>Condition</h3>
-                        <ul class="filter-options">
-                            <li>
-                                <input type="checkbox" id="new-accessories" checked>
-                                <label for="new-accessories">Like New</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="good-accessories" checked>
-                                <label for="good-accessories">Good</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="vintage-accessories">
-                                <label for="vintage-accessories">Vintage</label>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <button class="apply-filters">Apply Filters</button>
-                </aside>
-
-                <!-- Products Grid -->
-                <div class="category-products">
-                    <div class="category-controls">
-                        <div class="sort-by">
-                            <label for="sort">Sort by:</label>
-                            <select id="sort">
-                                <option value="featured">Featured</option>
-                                <option value="price-low">Price: Low to High</option>
-                                <option value="price-high">Price: High to Low</option>
-                                <option value="newest">Newest Arrivals</option>
-                                <option value="popular">Most Popular</option>
-                            </select>
-                        </div>
-                        <div class="view-options">
-                            <button class="view-option active" data-view="grid"><i class="fas fa-th"></i></button>
-                            <button class="view-option" data-view="list"><i class="fas fa-list"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="products-grid" id="productsGrid">
-                        <!-- Products will be loaded by JavaScript -->
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="pagination">
-                        <button class="page-btn disabled"><i class="fas fa-chevron-left"></i></button>
-                        <button class="page-btn active">1</button>
-                        <button class="page-btn">2</button>
-                        <button class="page-btn">3</button>
-                        <button class="page-btn">4</button>
-                        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="category-header">
+          <h1>Accessories</h1>
+          <p>
+            Complete your look with our collection of pre-loved accessories.
+            From bags to jewelry, find the perfect finishing touches for any
+            outfit.
+          </p>
         </div>
+
+        <div class="category-description">
+          <p>
+            Our accessories collection features gently used items in excellent
+            condition. Each piece adds personality to your style while
+            supporting sustainable fashion practices.
+          </p>
+        </div>
+
+        <div class="category-container">
+          <!-- Filter Sidebar -->
+          <aside class="filter-sidebar">
+            <div class="filter-card">
+              <h3>Categories</h3>
+              <ul class="filter-options">
+                <li>
+                  <input type="checkbox" id="bags" checked />
+                  <label for="bags"
+                    >Bags & Purses <span class="count">(36)</span></label
+                  >
+                </li>
+                <li>
+                  <input type="checkbox" id="shoes" />
+                  <label for="shoes"
+                    >Shoes <span class="count">(42)</span></label
+                  >
+                </li>
+                <li>
+                  <input type="checkbox" id="jewelry" />
+                  <label for="jewelry"
+                    >Jewelry <span class="count">(58)</span></label
+                  >
+                </li>
+                <li>
+                  <input type="checkbox" id="scarves" />
+                  <label for="scarves"
+                    >Scarves & Hats <span class="count">(27)</span></label
+                  >
+                </li>
+                <li>
+                  <input type="checkbox" id="belts" />
+                  <label for="belts"
+                    >Belts <span class="count">(19)</span></label
+                  >
+                </li>
+                <li>
+                  <input type="checkbox" id="sunglasses" />
+                  <label for="sunglasses"
+                    >Sunglasses <span class="count">(14)</span></label
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="filter-card">
+              <h3>Material</h3>
+              <ul class="filter-options">
+                <li>
+                  <input type="checkbox" id="leather" checked />
+                  <label for="leather">Leather</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="fabric" />
+                  <label for="fabric">Fabric</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="metal" />
+                  <label for="metal">Metal</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="suede" />
+                  <label for="suede">Suede</label>
+                </li>
+              </ul>
+            </div>
+
+            <div class="filter-card">
+              <h3>Price Range</h3>
+              <input
+                type="range"
+                min="5"
+                max="150"
+                value="75"
+                class="price-slider"
+              />
+              <div class="price-values">
+                <span>$5</span>
+                <span>$150+</span>
+              </div>
+            </div>
+
+            <div class="filter-card">
+              <h3>Condition</h3>
+              <ul class="filter-options">
+                <li>
+                  <input type="checkbox" id="new-accessories" checked />
+                  <label for="new-accessories">Like New</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="good-accessories" checked />
+                  <label for="good-accessories">Good</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="vintage-accessories" />
+                  <label for="vintage-accessories">Vintage</label>
+                </li>
+              </ul>
+            </div>
+
+            <button class="apply-filters">Apply Filters</button>
+          </aside>
+
+          <!-- Products Grid -->
+          <div class="category-products">
+            <div class="category-controls">
+              <div class="sort-by">
+                <label for="sort">Sort by:</label>
+                <select id="sort">
+                  <option value="featured">Featured</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="newest">Newest Arrivals</option>
+                  <option value="popular">Most Popular</option>
+                </select>
+              </div>
+              <div class="view-options">
+                <button class="view-option active" data-view="grid">
+                  <i class="fas fa-th"></i>
+                </button>
+                <button class="view-option" data-view="list">
+                  <i class="fas fa-list"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+              <!-- Products will be loaded by JavaScript -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+              <button class="page-btn disabled">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <button class="page-btn">4</button>
+              <button class="page-btn">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>GREENLOOP</h3>
-                    <p>Sustainable secondhand fashion for everyone. Join the movement to reduce textile waste.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h4>Accessories Categories</h4>
-                    <ul>
-                        <li><a href="#">Bags & Purses</a></li>
-                        <li><a href="#">Shoes</a></li>
-                        <li><a href="#">Jewelry</a></li>
-                        <li><a href="#">Scarves & Hats</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Customer Service</h4>
-                    <ul>
-                        <li><a href="#">Size Guide</a></li>
-                        <li><a href="#">Shipping Policy</a></li>
-                        <li><a href="#">Returns & Exchanges</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Newsletter</h4>
-                    <p>Subscribe for updates on new arrivals and exclusive deals.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Your email address" required>
-                        <button type="submit" class="btn">Subscribe</button>
-                    </form>
-                </div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>GREENLOOP</h3>
+            <p>
+              Sustainable secondhand fashion for everyone. Join the movement to
+              reduce textile waste.
+            </p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-pinterest"></i></a>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 GREENLOOP. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-            </div>
+          </div>
+          <div class="footer-column">
+            <h4>Accessories Categories</h4>
+            <ul>
+              <li><a href="#">Bags & Purses</a></li>
+              <li><a href="#">Shoes</a></li>
+              <li><a href="#">Jewelry</a></li>
+              <li><a href="#">Scarves & Hats</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Customer Service</h4>
+            <ul>
+              <li><a href="#">Size Guide</a></li>
+              <li><a href="#">Shipping Policy</a></li>
+              <li><a href="#">Returns & Exchanges</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Newsletter</h4>
+            <p>Subscribe for updates on new arrivals and exclusive deals.</p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit" class="btn">Subscribe</button>
+            </form>
+          </div>
         </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 GREENLOOP. All rights reserved. |
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+          </p>
+        </div>
+      </div>
     </footer>
 
     <!-- Cart Modal -->
     <div class="cart-modal" id="cartModal">
-        <div class="cart-modal-content">
-            <div class="cart-header">
-                <h3>Your Shopping Bag</h3>
-                <span class="close-cart">&times;</span>
-            </div>
-            <div class="cart-items">
-                <!-- Cart items will be added by JavaScript -->
-            </div>
-            <div class="cart-summary">
-                <div class="cart-total">
-                    <span>Total:</span>
-                    <span class="total-price">$0.00</span>
-                </div>
-                <button class="btn btn-primary checkout-btn">Proceed to Checkout</button>
-            </div>
+      <div class="cart-modal-content">
+        <div class="cart-header">
+          <h3>Your Shopping Bag</h3>
+          <span class="close-cart">&times;</span>
         </div>
+        <div class="cart-items">
+          <!-- Cart items will be added by JavaScript -->
+        </div>
+        <div class="cart-summary">
+          <div class="cart-total">
+            <span>Total:</span>
+            <span class="total-price">$0.00</span>
+          </div>
+          <button class="btn btn-primary checkout-btn">
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
     </div>
 
     <script src="js.js"></script>
     <script src="category.js"></script>
-</body>
+  </body>
 </html>
