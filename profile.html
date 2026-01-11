@@ -1,0 +1,10 @@
+// Trong profile.html, cập nhật script phần hiển thị tên
+const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+
+// Hiển thị tên đầy đủ
+document.getElementById('profileName').textContent = userData.fullName || 'Chưa cập nhật';
+document.getElementById('profileEmail').textContent = userData.email || 'Chưa cập nhật';
+document.getElementById('profileFullName').textContent = userData.fullName || 'Chưa cập nhật';
+
+// Lấy tên đầu tiên để hiển thị trên header
+const firstName = userData.fullName ? userData.fullName.split(' ')[0] : 'Khách';

@@ -37,8 +37,6 @@
               <li><a href="index.html#categories">Categories</a></li>
               <li><a href="index.html#about">About</a></li>
               <li><a href="index.html#sell">Sell with us</a></li>
-              <li><a href="login.html">Login</a></li>
-              <li><a href="register.html">Sign up</a></li>
             </ul>
           </nav>
 
@@ -63,142 +61,96 @@
         <li><a href="index.html#categories">Categories</a></li>
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#sell">Sell with us</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="register.html">Sign up</a></li>
       </ul>
     </div>
 
     <!-- Register Section -->
-    <section class="auth-page">
-      <div class="container">
+    <!-- Register Section -->
+<section class="auth-page">
+    <div class="container">
         <div class="auth-container">
-          <div class="auth-box">
-            <div class="auth-header">
-              <a href="index.html" class="auth-logo">
-                <i class="fas fa-recycle"></i>
-                GREENLOOP
-              </a>
-              <h1>Create a new account</h1>
-              <p>Tham gia cộng đồng thời trang bền vững của chúng tôi.</p>
+            <div class="auth-box">
+                <div class="auth-header">
+                    <a href="index.html" class="auth-logo">
+                        <i class="fas fa-recycle"></i>
+                        GREENLOOP
+                    </a>
+                    <h1>Tạo Tài Khoản Mới</h1>
+                    <p>Tham gia cộng đồng thời trang bền vững của chúng tôi.</p>
+                </div>
+
+                <form class="auth-form" id="registerForm">
+                    <div class="form-group">
+                        <label for="fullName">Họ và Tên</label>
+                        <input type="text" id="fullName" placeholder="Nhập họ và tên đầy đủ" required>
+                        <div class="form-error" id="nameError">Vui lòng nhập họ và tên</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" placeholder="Nhập địa chỉ email" required>
+                        <div class="form-error" id="registerEmailError">Vui lòng nhập email hợp lệ</div>
+                    </div>
+
+                    <div class="form-group password-toggle">
+                        <label for="registerPassword">Mật khẩu</label>
+                        <input type="password" id="registerPassword" placeholder="Nhập mật khẩu (ít nhất 8 ký tự)" required>
+                        <button type="button" class="toggle-password" id="toggleRegisterPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="form-error" id="registerPasswordError">Mật khẩu phải có ít nhất 8 ký tự</div>
+                    </div>
+
+                    <div class="form-group password-toggle">
+                        <label for="confirmPassword">Xác nhận mật khẩu</label>
+                        <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+                        <button type="button" class="toggle-password" id="toggleConfirmPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="form-error" id="confirmPasswordError">Mật khẩu không khớp</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại (tuỳ chọn)</label>
+                        <input type="tel" id="phone" placeholder="Nhập số điện thoại">
+                    </div>
+
+                    <div class="terms-agreement">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">Tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chính sách bảo mật</a> của GREENLOOP</label>
+                        <div class="form-error" id="termsError">Vui lòng chấp nhận điều khoản</div>
+                    </div>
+
+                    <div class="terms-agreement">
+                        <input type="checkbox" id="newsletter">
+                        <label for="newsletter">Đăng ký nhận bản tin và ưu đãi đặc biệt từ GREENLOOP</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary auth-btn">Đăng Ký</button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>Hoặc đăng ký với</span>
+                </div>
+
+                <div class="social-auth">
+                    <button class="social-btn facebook">
+                        <i class="fab fa-facebook"></i>
+                        Đăng ký với Facebook
+                    </button>
+                    <button class="social-btn google">
+                        <i class="fab fa-google"></i>
+                        Đăng ký với Google
+                    </button>
+                </div>
+
+                <div class="auth-footer">
+                    <p>Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></p>
+                </div>
             </div>
-
-            <form class="auth-form" id="registerForm">
-              <div class="form-group">
-                <label for="fullName">Full name</label>
-                <input
-                  type="text"
-                  id="fullName"
-                  placeholder="Nhập họ và tên đầy đủ"
-                  required
-                />
-                <div class="form-error" id="nameError">
-                  Please enter your full name
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="registerEmail">Email</label>
-                <input
-                  type="email"
-                  id="registerEmail"
-                  placeholder="Nhập địa chỉ email"
-                  required
-                />
-                <div class="form-error" id="registerEmailError">
-                  Please enter a valid email
-                </div>
-              </div>
-
-              <div class="form-group password-toggle">
-                <label for="registerPassword">Mật khẩu</label>
-                <input
-                  type="password"
-                  id="registerPassword"
-                  placeholder="Nhập mật khẩu (ít nhất 8 ký tự)"
-                  required
-                />
-                <button
-                  type="button"
-                  class="toggle-password"
-                  id="toggleRegisterPassword"
-                >
-                  <i class="fas fa-eye"></i>
-                </button>
-                <div class="form-error" id="registerPasswordError">
-                  Password has to have at least 8 characters
-                </div>
-              </div>
-
-              <div class="form-group password-toggle">
-                <label for="confirmPassword">Confirm password</label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  placeholder="Nhập lại mật khẩu"
-                  required
-                />
-                <button
-                  type="button"
-                  class="toggle-password"
-                  id="toggleConfirmPassword"
-                >
-                  <i class="fas fa-eye"></i>
-                </button>
-                <div class="form-error" id="confirmPasswordError">
-                  Password doesn't match
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Phone number(optional)</label>
-                <input type="tel" id="phone" placeholder="Nhập số điện thoại" />
-              </div>
-
-              <div class="terms-agreement">
-                <input type="checkbox" id="terms" required />
-                <label for="terms"
-                  >Tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và
-                  <a href="#">Chính sách bảo mật</a> của GREENLOOP</label
-                >
-                <div class="form-error" id="termsError">
-                  Vui lòng chấp nhận điều khoản
-                </div>
-              </div>
-
-              <div class="terms-agreement">
-                <input type="checkbox" id="newsletter" />
-                <label for="newsletter"
-                  >Đăng ký nhận bản tin và ưu đãi đặc biệt từ GREENLOOP</label
-                >
-              </div>
-
-              <button type="submit" class="btn btn-primary auth-btn">
-                Register
-              </button>
-            </form>
-
-            <div class="auth-divider">
-              <span>Or register with</span>
-            </div>
-
-            <div class="social-auth">
-              <button class="social-btn facebook">
-                <i class="fab fa-facebook"></i>
-                With Facebook
-              </button>
-              <button class="social-btn google">
-                <i class="fab fa-google"></i>
-                With Google
-              </button>
-            </div>
-
-            <div class="auth-footer">
-              <p>already have an account? <a href="login.html">Login now</a></p>
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer>
