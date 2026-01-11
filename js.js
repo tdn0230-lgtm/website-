@@ -135,8 +135,182 @@ const modalOverlay = document.createElement("div");
 modalOverlay.className = "modal-overlay";
 document.body.appendChild(modalOverlay);
 
-// Display Products
+// ========== HÀM KIỂM TRA ĐĂNG NHẬP ==========
+function checkLogin() {
+  return localStorage.getItem("userLoggedIn") === "true";
+}
+
+// ========== HÀM ĐĂNG XUẤT ==========
+function logoutUser() {
+  // Xóa thông tin đăng nhập
+  localStorage.removeItem("userLoggedIn");
+  localStorage.removeItem("userData");
+
+  // Thông báo đăng xuất thành công
+  showNotification("Đã đăng xuất thành công!");
+
+  // Đóng dropdown menu nếu đang mở
+  const dropdownMenu = document.querySelector(".user-dropdown-menu");
+  if (dropdownMenu) {
+    dropdownMenu.classList.remove("show");
+  }
+
+  // Cập nhật giao diện ngay lập tức
+  updateUserUI();
+
+  // Nếu đang ở trang cần đăng nhập, chuyển về trang chủ
+  const currentPage = window.location.pathname;
+  if (
+    currentPage.includes("profile.html") ||
+    currentPage.includes("orders.html") ||
+    currentPage.includes("wishlist.html")
+  ) {
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1000);
+  }
+}
+
+// ========== HÀM CẬP NHẬT GIAO DIỆN NGƯỜI DÙNG ==========
+function updateUserUI() {
+  const userIcon = document.querySelector(".user-icon");
+  if (!userIcon) return;
+
+  const isLoggedIn = checkLogin();
+
+  if (isLoggedIn) {
+    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+    const firstName = userData.fullName
+      ? userData.fullName.split(" ")[0]
+      : "Khách";
+
+    userIcon.innerHTML = `
+            <div class="user-dropdown">
+                <div class="user-dropdown-toggle">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="user-name">${firstName}</span>
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                </div>
+                <div class="user-dropdown-menu">
+                    <a href="profile.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        Tài khoản của tôi
+                    </a>
+                    <a href="orders.html" class="dropdown-item">
+                        <i class="fas fa-shopping-bag"></i>
+                        Đơn hàng
+                    </a>
+                    <a href="wishlist.html" class="dropdown-item">
+                        <i class="fas fa-heart"></i>
+                        Yêu thích
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Đăng xuất
+                    </a>
+                </div>
+            </div>
+        `;
+
+    // Thêm sự kiện cho dropdown
+    const dropdownToggle = userIcon.querySelector(".user-dropdown-toggle");
+    const dropdownMenu = userIcon.querySelector(".user-dropdown-menu");
+
+    if (dropdownToggle && dropdownMenu) {
+      dropdownToggle.addEventListener("click", function (e) {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("show");
+      });
+
+      // Đóng dropdown khi click bên ngoài
+      document.addEventListener("click", function (e) {
+        if (!userIcon.contains(e.target)) {
+          dropdownMenu.classList.remove("show");
+        }
+      });
+    }
+
+    // Thêm sự kiện logout
+    const logoutBtn = userIcon.querySelector(".logout-btn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        logoutUser();
+      });
+    }
+  } else {
+    // Chưa đăng nhập - hiển thị icon đăng nhập
+    userIcon.innerHTML = `
+            <a href="login.html" class="user-login-link">
+                <i class="fas fa-user"></i>
+                <span class="login-text">Đăng nhập</span>
+            </a>
+        `;
+  }
+}
+
+// ========== HÀM THÊM VÀO GIỎ HÀNG (CÓ KIỂM TRA ĐĂNG NHẬP) ==========
+function addToCart(productId) {
+  // Kiểm tra đăng nhập
+  if (!checkLogin()) {
+    showNotification("Vui lòng đăng nhập để thêm vào giỏ hàng!");
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1500);
+    return;
+  }
+
+  const product = products.find((p) => p.id === productId);
+
+  if (!product) return;
+
+  // Check if product is already in cart
+  const existingItem = cart.find((item) => item.id === productId);
+
+  if (existingItem) {
+    existingItem.quantity++;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: 1,
+    });
+  }
+
+  updateCart();
+  showNotification(`${product.name} đã được thêm vào giỏ hàng!`);
+}
+
+// ========== HÀM XỬ LÝ THANH TOÁN ==========
+function setupCheckout() {
+  const checkoutBtn = document.querySelector(".checkout-btn");
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", function () {
+      if (!checkLogin()) {
+        showNotification("Vui lòng đăng nhập để thanh toán!");
+        setTimeout(() => {
+          window.location.href = "login.html";
+        }, 1500);
+        return;
+      }
+
+      if (cart.length === 0) {
+        showNotification("Giỏ hàng của bạn đang trống!");
+        return;
+      }
+
+      showNotification("Đang xử lý thanh toán...");
+    });
+  }
+}
+
+// ========== HÀM HIỂN THỊ SẢN PHẨM ==========
 function displayProducts() {
+  if (!productsContainer) return;
+
   productsContainer.innerHTML = "";
 
   products.forEach((product) => {
@@ -187,14 +361,14 @@ function displayProducts() {
                       product.originalPrice
                     )}</span>
                     ${formatPrice(product.price)}
-                    <span class="savings">Save ${savings}%</span>
+                    <span class="savings">Tiết kiệm ${savings}%</span>
                 </div>
-                <p><strong>Condition:</strong> ${product.condition}</p>
+                <p><strong>Tình trạng:</strong> ${product.condition}</p>
                 <div class="product-actions">
                     <button class="btn btn-primary add-to-cart" data-id="${
                       product.id
                     }">
-                        <i class="fas fa-shopping-bag"></i> Add to Cart
+                        <i class="fas fa-shopping-bag"></i> Thêm vào giỏ
                     </button>
                     <button class="btn save-for-later" data-id="${product.id}">
                         <i class="far fa-heart"></i>
@@ -223,33 +397,17 @@ function displayProducts() {
   });
 }
 
-// Add to Cart Function
-function addToCart(productId) {
-  const product = products.find((p) => p.id === productId);
-
-  if (!product) return;
-
-  // Check if product is already in cart
-  const existingItem = cart.find((item) => item.id === productId);
-
-  if (existingItem) {
-    existingItem.quantity++;
-  } else {
-    cart.push({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-      quantity: 1,
-    });
+// ========== HÀM LƯU SẢN PHẨM YÊU THÍCH ==========
+function saveForLater(productId) {
+  // Kiểm tra đăng nhập
+  if (!checkLogin()) {
+    showNotification("Vui lòng đăng nhập để lưu sản phẩm!");
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1500);
+    return;
   }
 
-  updateCart();
-  showNotification(`${product.name} added to cart!`);
-}
-
-// Save for Later Function
-function saveForLater(productId) {
   const product = products.find((p) => p.id === productId);
 
   if (!product) return;
@@ -262,18 +420,23 @@ function saveForLater(productId) {
   if (button.innerHTML.includes("far fa-heart")) {
     button.innerHTML = '<i class="fas fa-heart"></i>';
     button.style.color = "#e76f51";
-    showNotification(`${product.name} saved for later!`);
+    showNotification(`${product.name} đã được thêm vào yêu thích!`);
   } else {
     button.innerHTML = '<i class="far fa-heart"></i>';
     button.style.color = "";
+    showNotification(`${product.name} đã được xóa khỏi yêu thích!`);
   }
 }
 
-// Update Cart Display
+// ========== HÀM CẬP NHẬT GIỎ HÀNG ==========
 function updateCart() {
   // Update cart count
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-  cartCount.textContent = totalItems;
+  if (cartCount) {
+    cartCount.textContent = totalItems;
+  }
+
+  if (!cartItemsContainer) return;
 
   // Update cart items display
   cartItemsContainer.innerHTML = "";
@@ -318,24 +481,31 @@ function updateCart() {
   });
 
   // Update total price
-  totalPriceElement.textContent = formatPrice(totalPrice);
+  if (totalPriceElement) {
+    totalPriceElement.textContent = formatPrice(totalPrice);
+  }
 
   // If cart is empty, show message
-  if (cart.length === 0) {
+  if (cart.length === 0 && cartItemsContainer) {
     cartItemsContainer.innerHTML =
-      '<p style="text-align: center; color: var(--gray);">Your cart is empty</p>';
+      '<p style="text-align: center; color: var(--gray);">Giỏ hàng của bạn đang trống</p>';
   }
 }
 
-// Remove from Cart Function
+// ========== HÀM XÓA KHỎI GIỎ HÀNG ==========
 function removeFromCart(productId) {
   cart = cart.filter((item) => item.id !== productId);
   updateCart();
-  showNotification("Item removed from cart");
+  showNotification("Đã xóa sản phẩm khỏi giỏ hàng");
 }
 
-// Show Notification
+// ========== HÀM HIỂN THỊ THÔNG BÁO ==========
 function showNotification(message) {
+  // Remove existing notifications
+  document.querySelectorAll(".notification").forEach((notification) => {
+    notification.remove();
+  });
+
   // Create notification element
   const notification = document.createElement("div");
   notification.className = "notification";
@@ -353,9 +523,11 @@ function showNotification(message) {
         animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
     `;
 
-  // Add CSS for animations
-  const style = document.createElement("style");
-  style.textContent = `
+  // Add CSS for animations if not exists
+  if (!document.querySelector("style[data-notification]")) {
+    const style = document.createElement("style");
+    style.setAttribute("data-notification", "true");
+    style.textContent = `
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
@@ -365,7 +537,8 @@ function showNotification(message) {
             to { opacity: 0; }
         }
     `;
-  document.head.appendChild(style);
+    document.head.appendChild(style);
+  }
 
   document.body.appendChild(notification);
 
@@ -377,86 +550,95 @@ function showNotification(message) {
   }, 3000);
 }
 
-// Toggle Mobile Menu
-mobileMenuBtn.addEventListener("click", function () {
-  mobileNav.classList.toggle("active");
-  modalOverlay.classList.toggle("active");
+// ========== SỰ KIỆN MOBILE MENU ==========
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener("click", function () {
+    mobileNav.classList.toggle("active");
+    modalOverlay.classList.toggle("active");
 
-  // Change icon based on menu state
-  if (mobileNav.classList.contains("active")) {
-    this.innerHTML = '<i class="fas fa-times"></i>';
-  } else {
-    this.innerHTML = '<i class="fas fa-bars"></i>';
-  }
-});
+    // Change icon based on menu state
+    if (mobileNav.classList.contains("active")) {
+      this.innerHTML = '<i class="fas fa-times"></i>';
+    } else {
+      this.innerHTML = '<i class="fas fa-bars"></i>';
+    }
+  });
+}
 
-// Toggle Cart Modal
-cartIcon.addEventListener("click", function () {
-  cartModal.classList.add("active");
-  modalOverlay.classList.add("active");
-});
+// ========== SỰ KIỆN CART MODAL ==========
+if (cartIcon) {
+  cartIcon.addEventListener("click", function () {
+    cartModal.classList.add("active");
+    modalOverlay.classList.add("active");
+  });
+}
 
-closeCart.addEventListener("click", function () {
-  cartModal.classList.remove("active");
-  modalOverlay.classList.remove("active");
-});
+if (closeCart) {
+  closeCart.addEventListener("click", function () {
+    cartModal.classList.remove("active");
+    modalOverlay.classList.remove("active");
+  });
+}
 
-// Close modals when clicking on overlay
+// ========== SỰ KIỆN ĐÓNG MODAL KHI CLICK OVERLAY ==========
 modalOverlay.addEventListener("click", function () {
-  cartModal.classList.remove("active");
-  mobileNav.classList.remove("active");
+  if (cartModal) cartModal.classList.remove("active");
+  if (mobileNav) mobileNav.classList.remove("active");
   modalOverlay.classList.remove("active");
 
   // Reset mobile menu button icon
-  mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+  if (mobileMenuBtn) {
+    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+  }
 });
 
-// Start Selling Button
-startSellingBtn.addEventListener("click", function () {
-  // Create a simple form modal
-  const sellModal = document.createElement("div");
-  sellModal.className = "sell-form-modal";
-  sellModal.innerHTML = `
+// ========== SỰ KIỆN NÚT BÁN HÀNG ==========
+if (startSellingBtn) {
+  startSellingBtn.addEventListener("click", function () {
+    // Create a simple form modal
+    const sellModal = document.createElement("div");
+    sellModal.className = "sell-form-modal";
+    sellModal.innerHTML = `
         <div class="sell-form-content">
             <div class="sell-form-header">
-                <h3>Start Selling Your Items</h3>
+                <h3>Bắt Đầu Bán Hàng</h3>
                 <span class="close-sell-form">&times;</span>
             </div>
             <div class="sell-form-body">
-                <p>Fill out this form and we'll send you a free shipping kit to get started!</p>
+                <p>Điền vào form này và chúng tôi sẽ gửi cho bạn bộ vận chuyển miễn phí để bắt đầu!</p>
                 <form id="sellForm">
                     <div class="form-group">
-                        <label for="sellerName">Full Name</label>
+                        <label for="sellerName">Họ và tên</label>
                         <input type="text" id="sellerName" required>
                     </div>
                     <div class="form-group">
-                        <label for="sellerEmail">Email Address</label>
+                        <label for="sellerEmail">Địa chỉ email</label>
                         <input type="email" id="sellerEmail" required>
                     </div>
                     <div class="form-group">
-                        <label for="itemType">What type of items do you want to sell?</label>
+                        <label for="itemType">Bạn muốn bán loại sản phẩm nào?</label>
                         <select id="itemType" required>
-                            <option value="">Select category</option>
-                            <option value="womens">Women's Clothing</option>
-                            <option value="mens">Men's Clothing</option>
-                            <option value="kids">Kids & Babies</option>
-                            <option value="accessories">Accessories</option>
-                            <option value="mix">Mix of items</option>
+                            <option value="">Chọn danh mục</option>
+                            <option value="womens">Thời Trang Nữ</option>
+                            <option value="mens">Thời Trang Nam</option>
+                            <option value="kids">Trẻ Em & Trẻ Sơ Sinh</option>
+                            <option value="accessories">Phụ Kiện</option>
+                            <option value="mix">Nhiều loại sản phẩm</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="itemCount">Approximately how many items?</label>
+                        <label for="itemCount">Khoảng bao nhiêu sản phẩm?</label>
                         <input type="number" id="itemCount" min="1" max="100" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit & Get Shipping Kit</button>
+                    <button type="submit" class="btn btn-primary">Gửi & Nhận Bộ Vận Chuyển</button>
                 </form>
             </div>
         </div>
     `;
 
-  // Add CSS for the modal
-  const sellModalStyle = document.createElement("style");
-  sellModalStyle.textContent = `
+    // Add CSS for the modal
+    const sellModalStyle = document.createElement("style");
+    sellModalStyle.textContent = `
         .sell-form-modal {
             position: fixed;
             top: 0;
@@ -521,43 +703,44 @@ startSellingBtn.addEventListener("click", function () {
         }
     `;
 
-  document.head.appendChild(sellModalStyle);
-  document.body.appendChild(sellModal);
+    document.head.appendChild(sellModalStyle);
+    document.body.appendChild(sellModal);
 
-  // Close button functionality
-  const closeBtn = sellModal.querySelector(".close-sell-form");
-  closeBtn.addEventListener("click", function () {
-    document.body.removeChild(sellModal);
-    document.head.removeChild(sellModalStyle);
-  });
-
-  // Form submission
-  const sellForm = document.getElementById("sellForm");
-  sellForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const sellerName = document.getElementById("sellerName").value;
-    const sellerEmail = document.getElementById("sellerEmail").value;
-
-    showNotification(
-      `Thanks ${sellerName}! We'll email your shipping kit to ${sellerEmail} within 24 hours.`
-    );
-
-    // Close the modal
-    document.body.removeChild(sellModal);
-    document.head.removeChild(sellModalStyle);
-  });
-
-  // Close modal when clicking outside
-  sellModal.addEventListener("click", function (e) {
-    if (e.target === sellModal) {
+    // Close button functionality
+    const closeBtn = sellModal.querySelector(".close-sell-form");
+    closeBtn.addEventListener("click", function () {
       document.body.removeChild(sellModal);
       document.head.removeChild(sellModalStyle);
-    }
-  });
-});
+    });
 
-// Newsletter Form Submission
+    // Form submission
+    const sellForm = document.getElementById("sellForm");
+    sellForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const sellerName = document.getElementById("sellerName").value;
+      const sellerEmail = document.getElementById("sellerEmail").value;
+
+      showNotification(
+        `Cảm ơn ${sellerName}! Chúng tôi sẽ gửi bộ vận chuyển đến ${sellerEmail} trong vòng 24 giờ.`
+      );
+
+      // Close the modal
+      document.body.removeChild(sellModal);
+      document.head.removeChild(sellModalStyle);
+    });
+
+    // Close modal when clicking outside
+    sellModal.addEventListener("click", function (e) {
+      if (e.target === sellModal) {
+        document.body.removeChild(sellModal);
+        document.head.removeChild(sellModalStyle);
+      }
+    });
+  });
+}
+
+// ========== SỰ KIỆN NEWSLETTER ==========
 const newsletterForm = document.querySelector(".newsletter-form");
 if (newsletterForm) {
   newsletterForm.addEventListener("submit", function (e) {
@@ -566,16 +749,36 @@ if (newsletterForm) {
     const email = emailInput.value;
 
     if (email) {
-      showNotification(`Thank you for subscribing with ${email}!`);
+      showNotification(`Cảm ơn bạn đã đăng ký với ${email}!`);
       emailInput.value = "";
     }
   });
 }
 
-// Initialize the page
+// ========== KHỞI TẠO TRANG ==========
 document.addEventListener("DOMContentLoaded", function () {
-  displayProducts();
+  // Kiểm tra và khởi tạo các thành phần
+  if (productsContainer) {
+    displayProducts();
+  }
+
   updateCart();
+  updateUserUI();
+  setupCheckout();
+
+  // Kiểm tra nếu đang ở trang cần đăng nhập nhưng chưa đăng nhập
+  const currentPage = window.location.pathname;
+  const protectedPages = ["profile.html", "orders.html", "wishlist.html"];
+  const isProtectedPage = protectedPages.some((page) =>
+    currentPage.includes(page)
+  );
+
+  if (isProtectedPage && !checkLogin()) {
+    showNotification("Vui lòng đăng nhập để truy cập trang này!");
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1500);
+  }
 
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -588,9 +791,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
         // Close mobile menu if open
-        mobileNav.classList.remove("active");
+        if (mobileNav) mobileNav.classList.remove("active");
         modalOverlay.classList.remove("active");
-        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        if (mobileMenuBtn)
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
 
         window.scrollTo({
           top: targetElement.offsetTop - 80,
@@ -600,3 +804,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// ========== KIỂM TRA ĐĂNG NHẬP TRÊN CÁC TRANG PROTECTED ==========
+// Hàm này sẽ được gọi từ các trang profile/orders/wishlist
+function checkLoginForProtectedPages() {
+  if (!checkLogin()) {
+    showNotification("Vui lòng đăng nhập để truy cập trang này!");
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1500);
+    return false;
+  }
+  return true;
+}
+
+// Xuất các hàm cần thiết cho các trang khác
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    checkLogin,
+    logoutUser,
+    updateUserUI,
+    checkLoginForProtectedPages,
+  };
+}
