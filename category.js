@@ -370,7 +370,30 @@ function displayCategoryProducts() {
   document.querySelectorAll(".add-to-cart").forEach((button) => {
     button.addEventListener("click", function () {
       const productId = parseInt(this.getAttribute("data-id"));
-      addToCart(productId);
+      // login gate (checkLogin & showNotification come from js.js)
+      if (typeof checkLogin === "function" && !checkLogin()) {
+        if (typeof showNotification === "function") showNotification("Vui lòng đăng nhập để thêm vào giỏ hàng!");
+        setTimeout(() => { window.location.href = "login.html"; }, 1500);
+        return;
+      }
+      // find the product in category data
+      const allCatProducts = (typeof menProducts !== "undefined" ? menProducts : [])
+        .concat(typeof womenProducts !== "undefined" ? womenProducts : [])
+        .concat(typeof kidProducts !== "undefined" ? kidProducts : [])
+        .concat(typeof accessoriesProducts !== "undefined" ? accessoriesProducts : []);
+      const product = allCatProducts.find(p => p.id === productId);
+      if (!product) return;
+      // use the shared cart array & helpers from js.js
+      if (typeof cart !== "undefined") {
+        const existing = cart.find(item => item.id === productId);
+        if (existing) { existing.quantity++; }
+        else {
+          cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, quantity: 1 });
+        }
+        if (typeof saveCartToLocalStorage === "function") saveCartToLocalStorage();
+        if (typeof updateCart === "function") updateCart();
+      }
+      if (typeof showNotification === "function") showNotification(product.name + " đã được thêm vào giỏ hàng!");
     });
   });
 
@@ -378,7 +401,21 @@ function displayCategoryProducts() {
   document.querySelectorAll(".save-for-later").forEach((button) => {
     button.addEventListener("click", function () {
       const productId = parseInt(this.getAttribute("data-id"));
-      saveForLater(productId);
+      if (typeof checkLogin === "function" && !checkLogin()) {
+        if (typeof showNotification === "function") showNotification("Vui lòng đăng nhập để lưu sản phẩm!");
+        setTimeout(() => { window.location.href = "login.html"; }, 1500);
+        return;
+      }
+      // toggle heart icon
+      if (this.innerHTML.includes("far fa-heart")) {
+        this.innerHTML = '<i class="fas fa-heart"></i>';
+        this.style.color = "#e76f51";
+        if (typeof showNotification === "function") showNotification("Đã lưu vào yêu thích!");
+      } else {
+        this.innerHTML = '<i class="far fa-heart"></i>';
+        this.style.color = "";
+        if (typeof showNotification === "function") showNotification("Đã xóa khỏi yêu thích!");
+      }
     });
   });
 }
@@ -435,49 +472,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
-
-// Helper functions
-function addToCart(productId) {
-  showNotification("Item added to cart!");
-}
-
-function saveForLater(productId) {
-  const button = document.querySelector(
-    `.save-for-later[data-id="${productId}"]`
-  );
-
-  if (button.innerHTML.includes("far fa-heart")) {
-    button.innerHTML = '<i class="fas fa-heart"></i>';
-    button.style.color = "#e76f51";
-    showNotification("Item saved for later!");
-  } else {
-    button.innerHTML = '<i class="far fa-heart"></i>';
-    button.style.color = "";
-  }
-}
-
-function showNotification(message) {
-  const notification = document.createElement("div");
-  notification.className = "notification";
-  notification.textContent = message;
-  notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background-color: var(--primary);
-        color: white;
-        padding: 15px 20px;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
-        z-index: 1003;
-        animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
-    `;
-
-  document.body.appendChild(notification);
-
-  setTimeout(() => {
-    if (notification.parentNode) {
-      notification.parentNode.removeChild(notification);
-    }
-  }, 3000);
-}

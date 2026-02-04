@@ -95,6 +95,13 @@ function handleLoginForm() {
 
         // Store login state in localStorage for demo
         localStorage.setItem("userLoggedIn", "true");
+        // Store minimal userData so the dropdown can show the name
+        var existingData = JSON.parse(localStorage.getItem("userData") || "{}");
+        if (!existingData.email) {
+          existingData.email = email;
+        }
+        localStorage.setItem("userData", JSON.stringify(existingData));
+
         if (remember) {
           localStorage.setItem("userEmail", email);
         }

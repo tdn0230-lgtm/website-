@@ -229,64 +229,93 @@ function logoutUser() {
 
 // ========== HÀM CẬP NHẬT GIAO DIỆN NGƯỜI DÙNG ==========
 function updateUserUI() {
-  const userIcon = document.querySelector(".user-icon");
+  var userIcon = document.querySelector(".user-icon");
   if (!userIcon) return;
 
-  const isLoggedIn = checkLogin();
+  var isLoggedIn = checkLogin();
+
+  // ---------- ẩn/hiện "Log in" & "Sign up" trong nav và mobile-nav ----------
+  var allLis = document.querySelectorAll(".nav-links li, .mobile-nav li");
+  for (var i = 0; i < allLis.length; i++) {
+    var li   = allLis[i];
+    var link = li.querySelector("a");
+    if (!link) continue;
+    var href = link.getAttribute("href") || "";
+    if (href.indexOf("login.html") !== -1 || href.indexOf("register.html") !== -1) {
+      li.style.display = isLoggedIn ? "none" : "";
+    }
+  }
 
   if (isLoggedIn) {
-    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-
-    // Lấy tên người dùng - ưu tiên fullName, nếu không có thì lấy từ email
-    let displayName = "Khách";
+    var userData    = JSON.parse(localStorage.getItem("userData") || "{}");
+    var displayName = "Khách";
 
     if (userData.fullName && userData.fullName.trim() !== "") {
-      displayName = userData.fullName.split(" ")[0]; // Lấy tên đầu tiên
+      displayName = userData.fullName.split(" ")[0];
     } else if (userData.email) {
-      // Lấy phần trước @ của email và format lại
-      const nameFromEmail = userData.email.split("@")[0];
-      displayName =
-        nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1);
+      var nameFromEmail = userData.email.split("@")[0];
+      displayName = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1);
     }
 
-    userIcon.innerHTML = `
-            <div class="user-dropdown">
-                <div class="user-dropdown-toggle">
-                    <i class="fas fa-user-circle"></i>
-                    <span class="user-name">${displayName}</span>
-                    <i class="fas fa-chevron-down dropdown-arrow"></i>
-                </div>
-                <div class="user-dropdown-menu">
-                    <a href="profile.html" class="dropdown-item">
-                        <i class="fas fa-user"></i>
-                        Tài khoản của tôi
-                    </a>
-                    <a href="orders.html" class="dropdown-item">
-                        <i class="fas fa-shopping-bag"></i>
-                        Đơn hàng
-                    </a>
-                    <a href="wishlist.html" class="dropdown-item">
-                        <i class="fas fa-heart"></i>
-                        Yêu thích
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item logout-btn">
-                        <i class="fas fa-sign-out-alt"></i>
-                        Đăng xuất
-                    </a>
-                </div>
-            </div>
-        `;
+    userIcon.innerHTML =
+      '<div class="user-dropdown">' +
+        '<div class="user-dropdown-toggle" id="userDropdownToggle">' +
+          '<i class="fas fa-user-circle"></i>' +
+          '<span class="user-name">' + displayName + '</span>' +
+          '<i class="fas fa-chevron-down dropdown-arrow"></i>' +
+        '</div>' +
+        '<div class="user-dropdown-menu" id="userDropdownMenu">' +
+          '<a href="profile.html" class="dropdown-item">' +
+            '<i class="fas fa-user"></i> Tài khoản của tôi' +
+          '</a>' +
+          '<a href="orders.html" class="dropdown-item">' +
+            '<i class="fas fa-shopping-bag"></i> Đơn hàng' +
+          '</a>' +
+          '<a href="wishlist.html" class="dropdown-item">' +
+            '<i class="fas fa-heart"></i> Yêu thích' +
+          '</a>' +
+          '<div class="dropdown-divider"></div>' +
+          '<button class="dropdown-item logout-btn" id="logoutDropdownBtn">' +
+            '<i class="fas fa-sign-out-alt"></i> Đăng xuất' +
+          '</button>' +
+        '</div>' +
+      '</div>';
 
-    // ... phần sự kiện dropdown và logout giữ nguyên ...
+    // --- toggle dropdown mở / đóng ---
+    var toggleBtn    = document.getElementById("userDropdownToggle");
+    var dropdownMenu = document.getElementById("userDropdownMenu");
+
+    if (toggleBtn && dropdownMenu) {
+      toggleBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("show");
+      });
+
+      // đóng khi click ra ngoài
+      document.addEventListener("click", function (e) {
+        if (dropdownMenu && !dropdownMenu.contains(e.target) &&
+            toggleBtn  && !toggleBtn.contains(e.target)) {
+          dropdownMenu.classList.remove("show");
+        }
+      });
+    }
+
+    // --- nút Đăng xuất trong dropdown ---
+    var logoutBtn = document.getElementById("logoutDropdownBtn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        logoutUser();
+      });
+    }
+
   } else {
-    // Chưa đăng nhập - hiển thị icon đăng nhập
-    userIcon.innerHTML = `
-            <a href="login.html" class="user-login-link">
-                <i class="fas fa-user"></i>
-                <span class="login-text">Đăng nhập</span>
-            </a>
-        `;
+    // Chưa đăng nhập – hiển thị link đăng nhập
+    userIcon.innerHTML =
+      '<a href="login.html" class="user-login-link">' +
+        '<i class="fas fa-user"></i>' +
+        '<span class="login-text">Đăng nhập</span>' +
+      '</a>';
   }
 }
 
